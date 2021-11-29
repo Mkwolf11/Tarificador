@@ -17,6 +17,8 @@ public class Tarificador_MarcosCabFro extends javax.swing.JFrame {
     Double resultadoTipo = 0.0; 
     public Tarificador_MarcosCabFro() {
         initComponents();
+        jLabel2.setVisible(false);
+        jSpinner2.setVisible(false);
     }
 
     /**
@@ -52,7 +54,7 @@ public class Tarificador_MarcosCabFro extends javax.swing.JFrame {
 
         jLabel1.setText("Material de envio:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cartas y Tarjetas Postales " }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Carta y Tarjeta Postal", "Carta" }));
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("Ordinaria");
@@ -135,12 +137,10 @@ public class Tarificador_MarcosCabFro extends javax.swing.JFrame {
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
                             .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(37, 37, 37)
-                                        .addComponent(jCheckBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                                         .addComponent(jCheckBox2)
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,9 +247,8 @@ public class Tarificador_MarcosCabFro extends javax.swing.JFrame {
        }
         if(jCheckBox3.isSelected() && (jRadioButton1.isSelected()|| jRadioButton2.isSelected()||jRadioButton3.isSelected()||jRadioButton4.isSelected())){
             resultadoTipo+= 1.94;
-        }else{
-            jLabel6.setText("Escoge un Tipo");
         }
+        
         Double ResultadoFinal = resultadoTipo;
         String resultado2 = ResultadoFinal.toString();
         if(jCheckBox1.isSelected()){
@@ -264,6 +263,8 @@ public class Tarificador_MarcosCabFro extends javax.swing.JFrame {
             
             jCheckBox2.setSelected(false);
             jCheckBox2.setEnabled(false);
+            jLabel2.setVisible(false);
+            jSpinner2.setVisible(false);
             
            jLabel6.setText(resultado2); 
         }else{
@@ -274,6 +275,9 @@ public class Tarificador_MarcosCabFro extends javax.swing.JFrame {
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         jCheckBox2.setEnabled(true);
+        jLabel2.setVisible(true);
+        jSpinner2.setVisible(true);
+        
         int peso =(int)jSpinner1.getValue();
         if(jRadioButton2.isSelected() && peso<=20){
             resultadoTipo = 0.0; 
@@ -298,7 +302,9 @@ public class Tarificador_MarcosCabFro extends javax.swing.JFrame {
 
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
         int peso =(int)jSpinner1.getValue();
-        if(jRadioButton3.isSelected() && peso<=20){
+        String carta = jComboBox1.getSelectedItem().toString();
+       
+        if(jRadioButton3.isSelected() && peso<=20 && carta != "Carta y Tarjeta Postal"){
             resultadoTipo = 0.0; 
             resultadoTipo+= 4.1;
         }else if(jRadioButton3.isSelected() && peso>20 && peso<=50){
@@ -310,6 +316,8 @@ public class Tarificador_MarcosCabFro extends javax.swing.JFrame {
         }else if(jRadioButton3.isSelected() && peso>100 && peso<=500){
             resultadoTipo = 0.0; 
             resultadoTipo+=6.38;
+        }else if(carta == "Carta y Tarjeta Postal"){
+            jLabel6.setText("Escoge bien los valores");
         }
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
